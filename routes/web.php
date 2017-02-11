@@ -17,6 +17,7 @@ Route::group(['namespace' => 'Site'], function(){
     Route::get('/','SiteController@index');
     Route::get('/categoria/{id}', 'SiteController@categoria')->middleware('auth');
     Route::get('/contato', 'SiteController@contato');
+    Route::get('/comandos', 'SiteController@comandos');
 });
 
 
@@ -28,11 +29,11 @@ Route::group(['prefix'=>'painel', 'middleware' => 'auth'], function(){
     Route::get('/', function(){
         return 'tela inicial do grupo painel';
     });
-    
+
     Route::get('/financeiro', function(){
         return 'tela financeiro no painel';
     });
-    
+
 });
 
 Route::get('/login', function(){
