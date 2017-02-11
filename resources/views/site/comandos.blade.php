@@ -25,9 +25,12 @@
   @else
     <p> $array2 está vazia </p>
   @endif
+  {{--
+
+
 
   @foreach ($array2 as $value)
     <p>{{$value}}</p>
   @endforeach
-
+  --}}
 @endsection
