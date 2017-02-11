@@ -21,8 +21,10 @@ class SiteController extends Controller
 
 
     public function index() {
-        $variavel = 'fsaffs';
-        return view('teste', compact('variavel'));
+        $teste1 = 'fsaffs';
+        $teste2 = 'nova string';
+        $teste3 = 'terceira string';
+        return view('site.teste', compact('teste1', 'teste2', 'teste3'));
     }
     
     public function categoria($id) {
