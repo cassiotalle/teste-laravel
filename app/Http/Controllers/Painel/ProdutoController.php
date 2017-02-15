@@ -93,6 +93,6 @@ class ProdutoController extends Controller
     }
 
     public function tests(){
-
+      
     }
 }
