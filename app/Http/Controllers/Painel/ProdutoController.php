@@ -33,7 +33,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return "formulário de cadastro";
     }
 
     /**
