@@ -1,6 +1,6 @@
 @extends('painel.products.template')
 
-@section('section')
+@section('content')
   <h1 class="title_pg">Listagem </h1>
   <a href="{{route('produtos.create')}}" class="create btn btn-default"><span class="glyphicon glyphicon-plus"></span>&nbsp Cadastrar</a>
   <table class="table table-bordered table-striped">
