@@ -5,7 +5,9 @@
       <th>Descricao</th>
   </tr>
   @foreach ($products as $product)
+  <tr>
     <td>{{$product->name}}</td>
     <td>{{$product->description}}</td>
+  </tr>
   @endforeach
 </table>
