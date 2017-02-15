@@ -4,17 +4,26 @@ namespace App\Http\Controllers\Painel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Painel\Product;
 
 class ProdutoController extends Controller
 {
+
+  private $product;
+
+  public function __construct(Product $product){
+    $this->product = $product;
+  }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Product $product)
     {
-        //
+        $products = $product->all();
+        return view('painel.products.index', compact('products'));
     }
 
     /**
@@ -81,5 +90,9 @@ class ProdutoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function tests(){
+
     }
 }

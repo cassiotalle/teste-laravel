@@ -1,0 +1,11 @@
+<h1>Listagem dos produtos</h1>
+<table>
+  <tr>
+      <th>Nome</th>
+      <th>Descricao</th>
+  </tr>
+  @foreach ($products as $product)
+    <td>{{$product->name}}</td>
+    <td>{{$product->description}}</td>
+  @endforeach
+</table>
