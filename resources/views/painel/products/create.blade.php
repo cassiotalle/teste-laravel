@@ -7,14 +7,14 @@
   {!!csrf_field()!!}
   <div class="form-group">
   <label for="name">Nome</label>
-  <input type="input" class="form-control" id="name" placeholder="Nome">
+  <input type="input" class="form-control" name="name" id="name" placeholder="Nome">
 </div>
 <div class="form-group">
   <label for="number">Numero</label>
-  <input type="input" class="form-control" id="number" placeholder="Número">
+  <input type="input" class="form-control" name="number" id="number" placeholder="Número">
 </div>
 
-<select class="category" name="">
+<select class="category" name="category">
   @foreach ($categorys as $category)
     <option value="{{$category}}">{{$category}}</option>
   @endforeach
@@ -22,7 +22,7 @@
 
 <div class="checkbox">
   <label>
-    <input type="checkbox"> Ativo
+    <input type="checkbox" name="active"> Ativo
   </label>
 </div>
 <div class="form-group">

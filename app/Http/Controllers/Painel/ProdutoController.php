@@ -46,6 +46,19 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
+
+      $data = $request->all();
+
+      $insert = $this->product->insert();
+
+      if ($insert) {
+        retrun redirect()->route('painel.produtos.index');
+      }
+
+      //dd($request->all());
+      //dd($request->only(['name', 'category']));
+      //dd($request->except(['description', '_token']));
+      //dd($request->input('name'));
         return "cadastrando..";
     }
 
