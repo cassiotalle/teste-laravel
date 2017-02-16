@@ -74,3 +74,7 @@ Route::get('/', function () {
     return "esta é a paina inicial";
 });
 */
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
