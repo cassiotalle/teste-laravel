@@ -2,6 +2,9 @@
 
 @section('content')
   <h1>Adicionar</h1>
+
+<form class="" action="{{route('produtos.store')}}" method="post">
+  {!!csrf_field()!!}
   <div class="form-group">
   <label for="name">Nome</label>
   <input type="input" class="form-control" id="name" placeholder="Nome">
@@ -10,15 +13,24 @@
   <label for="number">Numero</label>
   <input type="input" class="form-control" id="number" placeholder="Número">
 </div>
-<div class="form-group">
-  <label for="exampleInputFile">File input</label>
-  <input type="file" id="exampleInputFile">
-  <p class="help-block">Example block-level help text here.</p>
-</div>
+
+<select class="category" name="">
+  @foreach ($categorys as $category)
+    <option value="{{$category}}">{{$category}}</option>
+  @endforeach
+</select>
+
 <div class="checkbox">
   <label>
     <input type="checkbox"> Ativo
   </label>
 </div>
+<div class="form-group">
+<textarea name="description" class="form-control" placeholder="Descricao"></textarea>
+</div>
+<div class="form-group">
 <button type="submit" class="btn btn-default">Submit</button>
+</div>
+</form>
+
 @endsection
