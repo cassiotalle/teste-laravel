@@ -3,42 +3,43 @@
 @section('content')
   <h1>Adicionar</h1>
 
+  @if (isset($errors) && count($errors)>0)
+    <div class="alert alert-danger">
+      @foreach ($errors->all() as $error)
+        <p>{{$error}}</p>
+      @endforeach
+    </div>
+  @endif
+
 <form class="" action="{{route('produtos.store')}}" method="post">
-
-@if (isset($product))
-
-{!!Form::model($product, ['route' => ['produtos.update', $product->id], 'files' => true, 'class'=>'form'] )!!}
-
-{{ method_field('PUT') }}
-
-@else
-{!!Form::open(['route' => 'produtos.store', 'class' => 'form'])!!}
-@endif
-
-
-
   {!!csrf_field()!!}
   <div class="form-group">
-  {!! Form::text('name', null, ['placeholder'=>"Nome", 'class'=> 'form-control'] ) !!}
-  </div>
+  <label for="name">Nome</label>
+  <input type="input" class="form-control" name="name" id="name" placeholder="Nome" value="{{old('name')}}">
+</div>
 <div class="form-group">
-  {!! Form::text('number', null, ['placeholder'=>"Número", 'class'=> 'form-control'] ) !!}
+  <label for="number">Numero</label>
+  <input type="input" class="form-control" name="number" id="number" placeholder="Número" value="{{old('number')}}">
 </div>
 
-  {!!Form::select('category', $categorys, null, ['class' => 'form-control'])!!}
+<select class="category" name="category">
+  <option value="">Escolha a categoria</option>
+  @foreach ($categorys as $category)
+    <option value="{{$category}}">{{$category}}</option>
+  @endforeach
+</select>
 
 <div class="checkbox">
   <label>
-    {!! Form::checkbox('active') !!}
-    Ativo?
+    <input type="checkbox" name="active" value="1"> Ativo
   </label>
 </div>
 <div class="form-group">
-{!! Form::textarea('description', null, ['placeholder'=>"Descrição", 'class'=> 'form-control'] ) !!}
+<textarea name="description" class="form-control" placeholder="Descricao" value="{{old('description')}}"></textarea>
 </div>
 <div class="form-group">
 <button type="submit" class="btn btn-default">Submit</button>
 </div>
-{!!Form::close()!!}
+</form>
 
 @endsection

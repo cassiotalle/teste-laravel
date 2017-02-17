@@ -47,11 +47,28 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
 
-      $data = $request->all();
+      $dataForm = $request->all();
 
-      $data['active'] = (isset($data['active'])) ? 0 : 1;
+      $dataForm['active'] = (isset($dataForm['active'])) ? 0 : 1;
 
-      $insert = $this->product->create($data);
+      //$this->validate($request, $this->product->rules);
+
+      $messages = [
+        'name.required' => 'O campo nome é obrigatório',
+        'number.numeric' => 'Apenas números',
+        'numer.required' => 'O campo número é obrigatório',
+      ];
+
+      $validate = validator($dataForm, $this->product->rules, $messages);
+
+      if($validate->fails()){
+        return redirect()
+          ->route('produtos.create')
+          ->withErrors($validate)
+          ->withInput();
+      }
+
+      $insert = $this->product->create($dataForm);
 
       if ($insert) {
         return redirect()->route('produtos.index');
