@@ -35,7 +35,7 @@ class ProdutoController extends Controller
     {
         $title = "Cadastrar novo produto";
         $categorys = ['Eletrodomestico','Limpeza','Banho','Moveis'];
-        return view('painel.products.create', compact('title', 'categorys'));
+        return view('painel.products.create-edit', compact('title', 'categorys'));
     }
 
     /**
@@ -49,10 +49,15 @@ class ProdutoController extends Controller
 
       $data = $request->all();
 
-      $insert = $this->product->insert();
+      $data['active'] = (isset($data['active'])) ? 0 : 1;
+
+      $insert = $this->product->create($data);
 
       if ($insert) {
-        retrun redirect()->route('painel.produtos.index');
+        return redirect()->route('produtos.index');
+      }
+      else{
+        return redirect()->route('produtos.create');
       }
 
       //dd($request->all());
@@ -70,7 +75,9 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = $this->product->find($id);
+        $title = "Produto: {$product->name}";
+        return view('painel.products.show', compact('product', 'title'));
     }
 
     /**
@@ -81,7 +88,10 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
-        //
+      $product = $this->product->find($id);
+      $title = "Editar produto: {$product->name}";
+      $categorys = ['Eletrodomestico','Limpeza','Banho','Moveis'];
+      return view('painel.products.create-edit', compact('title', 'categorys', 'product'));
     }
 
     /**
@@ -93,7 +103,16 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+      $product = $this->product->find($id);
+      $update = $product->update($request);
+
+        if($update){
+          return redirect()->route('produtos.index');
+        }
+        else{
+          return redirect()->route('produtos.edit', $id)->with(['errors' => 'Falha ao editar']);
+        }
     }
 
     /**
@@ -104,7 +123,16 @@ class ProdutoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = $this->product->find($id);
+
+        $delete = $product->delete();
+
+        if($delete){
+          return redirect()->route('products.index');
+        }
+        else{
+          return redirect()->route('products.show', $product->id)->with(['errors' => 'Falha ao apagar o produto']);
+        }
     }
 
     public function tests(){

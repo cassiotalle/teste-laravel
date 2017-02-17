@@ -22,7 +22,7 @@
 
 <div class="checkbox">
   <label>
-    <input type="checkbox" name="active"> Ativo
+    <input type="checkbox" name="active" value="1"> Ativo
   </label>
 </div>
 <div class="form-group">

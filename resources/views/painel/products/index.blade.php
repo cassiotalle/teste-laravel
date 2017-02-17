@@ -11,11 +11,11 @@
     </tr>
     @foreach ($products as $product)
     <tr>
-      <td>{{$product->name}}</td>
+      <td><a href="{{route('produtos.show', $product->id)}}">{{$product->name}}</a></td>
       <td>{{$product->description}}</td>
       <td>
-        <a href="#" class="edit actions"><span class="glyphicon glyphicon-pencil"></span></a>
-        <a href="#" class="delete actions"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="{{route('produtos.edit', $product->id)}}" class="edit actions"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a href="{{route('produtos.destroy', $product->id)}}" class="delete actions"><span class="glyphicon glyphicon-trash"></span></a>
       </td>
     </tr>
     @endforeach
