@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Painel;
-
+namespace App\Http\Requests\Painel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Painel\Product;
@@ -44,7 +44,7 @@ class ProdutoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductFormRequest $request)
     {
 
       $dataForm = $request->all();
@@ -52,7 +52,7 @@ class ProdutoController extends Controller
       $dataForm['active'] = (isset($dataForm['active'])) ? 0 : 1;
 
       //$this->validate($request, $this->product->rules);
-
+      /*
       $messages = [
         'name.required' => 'O campo nome é obrigatório',
         'number.numeric' => 'Apenas números',
@@ -67,7 +67,7 @@ class ProdutoController extends Controller
           ->withErrors($validate)
           ->withInput();
       }
-
+      */
       $insert = $this->product->create($dataForm);
 
       if ($insert) {
@@ -120,18 +120,19 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
       $product = $this->product->find($id);
-      $update = $product->update($request);
+      $dataForm = $request->all();
+      $update = $product->update($dataForm);
 
-        if($update){
-          return redirect()->route('produtos.index');
-        }
-        else{
-          return redirect()->route('produtos.edit', $id)->with(['errors' => 'Falha ao editar']);
-        }
+      if($update){
+        return redirect()->route('produtos.index');
+      }
+      else{
+        return redirect()->route('produtos.edit', $id)->with(['errors' => 'Falha ao ditar']);
+      }
+
+
     }
-
     /**
      * Remove the specified resource from storage.
      *
